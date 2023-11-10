@@ -1,11 +1,12 @@
-from django.urls import path 
+from django.urls import include, path 
 from . import views 
 
 urlpatterns = [ 
     # path function defines a url pattern 
     # '' is empty to represent based path to app 
     # views.index is the function defined in views.py 
-    # name = 'index' parameter is to dynamically create url   
+    # name = 'index' parameter is to dynamically create url
+    path("__reload__/", include("django_browser_reload.urls")),   
     path('', views.index, name='index'),
     path('user/<int:user_id>/', views.account, name='account'), # Accessing someone else's account
     path('user/', views.yourAccount, name='yourAccount'), # Accessing your own account
