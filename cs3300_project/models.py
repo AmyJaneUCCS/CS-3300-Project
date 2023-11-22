@@ -9,10 +9,10 @@ class User(models.Model):
 
     # Define default String to return the name for representing the Model object."
     def __str__(self):
-        return self.name
+        return self.username
 
     def get_absolute_url(self):
-        return reverse('clip-detail', args=[str(self.id)])
+        return reverse('user-detail', args=[str(self.username)])
     
 
 class Clip(models.Model):
@@ -30,7 +30,7 @@ class Clip(models.Model):
 
     # Define default String to return the name for representing the Model object."
     def __str__(self):
-        return self.name
+        return self.title
 
     # Returns the URL to access a particular instance of MyModelName.
     # if you define this method then Django will automatically
