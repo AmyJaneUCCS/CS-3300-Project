@@ -1,0 +1,13 @@
+{% extends 'cs3300_project/base_template.html' %} {% block content %}
+<h1>Clip List</h1>
+{% if clip_list %}
+<ul>
+  {% for clip in clip_list %}
+  <li>
+    <a href="{{ clip.get_absolute_url }}">{{ clip.title }}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>There are no clips.</p>
+{% endif %} {% endblock %}

@@ -1,3 +1,4 @@
+from .views import ClipListView, ClipDetailView
 from django.urls import include, path 
 from . import views 
 
@@ -7,7 +8,9 @@ urlpatterns = [
     # views.index is the function defined in views.py 
     # name = 'index' parameter is to dynamically create url
     path("__reload__/", include("django_browser_reload.urls")),   
-    path('', views.index, name='index'),
+    #path('', views.index, name='index'),
+    path ('', ClipListView.as_view(), name='index'),
+    path('clips/<int:pk>', ClipDetailView.as_view(), name='clip-detail'),
     path('user/<int:user_id>/', views.account, name='account'), # Accessing someone else's account
     path('user/', views.yourAccount, name='yourAccount'), # Accessing your own account
     path('user/clips', views.yourClips, name='yourClips'), # Accessing your own clips

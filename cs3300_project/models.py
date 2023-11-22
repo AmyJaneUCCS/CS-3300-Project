@@ -36,5 +36,5 @@ class Clip(models.Model):
     # if you define this method then Django will automatically
     # add a "View on Site" button to the model's record editing screens in the Admin site
     def get_absolute_url(self):
-        return reverse('clip-detail', args=[str(self.title)])
+        return reverse('clip-detail', args=[str(self.id)])
     
