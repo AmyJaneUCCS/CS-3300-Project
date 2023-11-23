@@ -1,8 +1,13 @@
 from django.shortcuts import redirect, render
 from django.views import generic
+from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
+
+from django.contrib.auth import authenticate, login, logout
 
 from cs3300_project.forms import ClipForm
 from .models import Clip, User
+from .forms import CreateUserForm
 
 class ClipListView(generic.ListView):
     model = Clip
@@ -12,6 +17,35 @@ class ClipDetailView(generic.DetailView):
 # Create your views here.
 #    def index(request): 
 #        return render(request, 'cs3300_project/index.html') 
+
+# Views for user authentification
+def registerPage(request):
+    form = CreateUserForm()
+
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(request, "Account was successfully created for " + user)
+            return redirect('login')
+
+    context = {'form': form}
+    return render(request, 'accounts/register.html', context)
+
+def loginPage(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('yourClips')
+
+    context = {}
+    return render(request, 'accounts/login.html', context)
 
 def account(request, user_id):
     user=User.objects.get(id=user_id)
