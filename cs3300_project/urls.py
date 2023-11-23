@@ -18,4 +18,6 @@ urlpatterns = [
     path('user/<int:user_id>/update_clip/<int:clip_id>', views.updateClip, name='update_clip'), # Updating a clip
     path('user/<int:user_id>/delete_clip/<int:clip_id>', views.deleteClip, name='delete_clip'), # Deleting a clip
     path('user/saved', views.yourSaved, name='yourSaved'), # Accessing your saved clips
+    path('register/', views.registerPage, name='register'),
+    path('login/', views.loginPage, name='login'),
 ] 
