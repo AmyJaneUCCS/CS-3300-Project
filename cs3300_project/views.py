@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from django.views import generic
 
+from cs3300_project.forms import ClipForm
 from .models import Clip, User
 
 class ClipListView(generic.ListView):
@@ -21,7 +22,59 @@ def yourAccount(request):
     return account(request, 1)
 
 def yourClips(request):
-    return render(request, 'cs3300_project/clips.html')
+    return render(request, 'cs3300_project/yourclips.html')
 
 def yourSaved(request):
     return render(request, 'cs3300_project/saved.html')
+
+def createClip(request, user_id):
+    form = ClipForm()
+    user = User.objects.get(pk=user_id)
+
+    if request.method == 'POST':
+        # Create a new dictionary with form data and clip_id
+        clip_data = request.POST.copy()
+        clip_data['user_id'] = user_id
+
+        form = ClipForm(clip_data)
+        if form.is_valid():
+            # Save the form without committing to the database
+            clip = form.save(commit=False)
+            # Set the user relationship
+            clip.user = user
+            clip.save()
+
+            # Redirect back to the your clips page
+            return redirect('yourClips')
+        
+    context = {'form': form}
+    return render(request, 'cs3300_project/clip_form.html', context)
+
+def updateClip(request, user_id, clip_id):
+    clip = Clip.objects.get(pk=clip_id)
+    form = ClipForm(instance=clip)
+
+    if request.method == 'POST':
+        clip_data = request.POST.copy()
+        form=ClipForm(clip_data, instance=clip) # Autofills the data
+
+        if form.is_valid():
+            clip.title=form.cleaned_data['title']
+            clip.game=form.cleaned_data['game']
+            clip.description=form.cleaned_data['description']
+            clip.save()
+            return redirect('yourClips')
+        
+    context = {'form': form, 'clip': clip}
+    return render(request, 'cs3300_project/clip_form.html', context)
+
+def deleteClip(request, user_id, clip_id):
+    form = ClipForm()
+    clip = Clip.objects.get(pk=clip_id)
+
+    if request.method == 'POST':
+        clip.delete()
+        return redirect('yourClips')
+    
+    context = {'form': form, 'clip': clip}
+    return render(request, 'cs3300_project/clip_delete_form.html', context)
