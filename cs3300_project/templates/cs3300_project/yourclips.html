@@ -1,0 +1,20 @@
+<!-- inherit from base.html -->
+{% extends "cs3300_project/base_template.html" %}
+
+<!-- Replace block content in base_template.html -->
+{% block content %}
+<h1>Your Clips</h1>
+
+<!-- Give the user the oppurtunity to create a clip -->
+<p>
+  <a
+    class="btn btn-primary"
+    href="{% url 'create_clip' user.id %}"
+    role="button"
+    >Create Clip</a
+  >
+</p>
+
+<!-- Show the user all the clips they have created, if they have any -->
+
+{% endblock %}

@@ -1,2 +1,8 @@
 from django.forms import ModelForm 
-# Create forms here 
+from .models import Clip
+
+# Create forms here
+class ClipForm(ModelForm):
+    class Meta:
+        model = Clip
+        fields = ('title', 'game', 'description') 
