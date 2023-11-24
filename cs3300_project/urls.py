@@ -20,4 +20,5 @@ urlpatterns = [
     path('user/saved', views.yourSaved, name='yourSaved'), # Accessing your saved clips
     path('register/', views.registerPage, name='register'),
     path('login/', views.loginPage, name='login'),
+    path('logout/', views.logoutUser, name='logout'),
 ] 

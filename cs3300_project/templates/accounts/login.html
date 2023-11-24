@@ -29,21 +29,6 @@
     <input class="btn btn-primary" type="submit" value="Login" />
   </form>
 
-  <!-- If the user doesn't have an account -->
-  <p>
-    Don't have an account?
-    <a href="{% url 'register' %}">Register</a>
-  </p>
-</div>
-
-{% endblock %}
-
-<h3>Login Page</h3>
-
-<form method="POST" action="">
-  {% csrf_token %} {{ form.username.label_tag }} {{ form.username }} {{
-  form.password.label_tag }} {{ form.password }}
-
   <!-- display success message if user was able to create an account -->
   {% for message in messages %}
   <p>{{ message }}</p>
@@ -54,5 +39,6 @@
     Don't have an account?
     <a href="{% url 'register' %}">Register</a>
   </p>
-  <input type="submit" name="Login User" />
-</form>
+</div>
+
+{% endblock %}

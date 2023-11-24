@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 from cs3300_project.forms import ClipForm
 from .models import Clip, User
@@ -43,10 +44,18 @@ def loginPage(request):
         if user is not None:
             login(request, user)
             return redirect('yourClips')
+        else:
+            messages.info(request, 'Username OR password is incorrect')
+            return redirect('login')
 
     context = {}
     return render(request, 'accounts/login.html', context)
 
+def logoutUser(request):
+    logout(request)
+    return redirect('login')
+
+# Other views
 def account(request, user_id):
     user=User.objects.get(id=user_id)
     context = {'user':user }
@@ -55,6 +64,7 @@ def account(request, user_id):
 def yourAccount(request):
     return account(request, 1)
 
+@login_required(login_url='login')
 def yourClips(request):
     return render(request, 'cs3300_project/yourclips.html')
 
