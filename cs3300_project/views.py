@@ -25,9 +25,11 @@ def registerPage(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, "Account was successfully created for " + user)
+            user = form.save()
+            username = form.cleaned_data.get('username')
+            player = Player.objects.create(username=username, user=user)
+            player.save()
+            messages.success(request, "Account was successfully created for " + username)
             return redirect('login')
 
     context = {'form': form}
@@ -60,6 +62,7 @@ def account(request, player_id):
     context = {'player':player }
     return render(request, 'cs3300_project/account.html', context)
 
+# Accessing the information for your own account
 def yourAccount(request):
     return account(request, 1)
 
@@ -71,6 +74,7 @@ def yourClips(request):
 def yourSaved(request):
     return render(request, 'cs3300_project/saved.html')
 
+# Code for creating, updating, and deleting a clip
 def createClip(request, player_id):
     form = ClipForm()
     player = Player.objects.get(pk=player_id)

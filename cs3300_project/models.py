@@ -1,11 +1,12 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Player(models.Model):
     username = models.CharField(max_length=100)
-    summary = models.TextField(blank=False)
-
+    summary = models.TextField(blank=True) # Description not required
+    user = models.OneToOneField(User, null=True, on_delete = models.CASCADE)
 
     # Define default String to return the name for representing the Model object."
     def __str__(self):
@@ -26,7 +27,7 @@ class Clip(models.Model):
     title = models.CharField(max_length=200)
     game = models.CharField(max_length=200, choices=GAME)
     description = models.TextField(blank=False)
-    player = models.ForeignKey(Player, on_delete=models.CASCADE, default=None)    # A clip has a singular player
+    player = models.ForeignKey(Player, null=True, on_delete=models.CASCADE, default=None)    # A clip has a singular player
 
     # Define default String to return the name for representing the Model object."
     def __str__(self):
