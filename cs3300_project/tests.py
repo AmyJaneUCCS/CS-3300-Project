@@ -1,28 +1,28 @@
 from django.test import TestCase
-from .models import User, Clip
+from .models import Player, Clip
 
 # Create your tests here.
-class UserTestCase(TestCase):
+class PlayerTestCase(TestCase):
     def setUp(self):
-        User.objects.create(username="userTest1", summary="This is the test summary for user 1")
-        User.objects.create(username="userTest2", summary="This is the test summary for user 2")
+        Player.objects.create(username="playerTest1", summary="This is the test summary for player 1")
+        Player.objects.create(username="playerTest2", summary="This is the test summary for player 2")
     
-    def test_user_details(self):
-        userTest1 = User.objects.get(username="userTest1")
-        self.assertEqual(userTest1.username, "userTest1")
-        self.assertEqual(userTest1.summary, "This is the test summary for user 1")
-        userTest2 = User.objects.get(username="userTest2")
-        self.assertEqual(userTest2.username, "userTest2")
-        self.assertEqual(userTest2.summary, "This is the test summary for user 2")
+    def test_player_details(self):
+        playerTest1 = Player.objects.get(username="playerTest1")
+        self.assertEqual(playerTest1.username, "playerTest1")
+        self.assertEqual(playerTest1.summary, "This is the test summary for player 1")
+        playerTest2 = Player.objects.get(username="playerTest2")
+        self.assertEqual(playerTest2.username, "playerTest2")
+        self.assertEqual(playerTest2.summary, "This is the test summary for player 2")
 
 class ClipTestCase(TestCase):
     def setUp(self):
-        user = User.objects.create(username="userTest1", summary="This is the test summary for user 1")
-        Clip.objects.create(title="Val Ace", game="Valorant", description="This is a description", user=user)
+        player = Player.objects.create(username="playerTest1", summary="This is the test summary for player 1")
+        Clip.objects.create(title="Val Ace", game="Valorant", description="This is a description", player=player)
     
     def test_clip_details(self):
         clipTest1 = Clip.objects.get(title="Val Ace")
         self.assertEqual(clipTest1.title, "Val Ace")
         self.assertEqual(clipTest1.game, "Valorant")
         self.assertEqual(clipTest1.description, "This is a description")
-        self.assertEqual(clipTest1.user.username, "userTest1")
+        self.assertEqual(clipTest1.player.username, "playerTest1")

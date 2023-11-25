@@ -2,7 +2,7 @@ from django.db import models
 from django.urls import reverse
 
 # Create your models here.
-class User(models.Model):
+class Player(models.Model):
     username = models.CharField(max_length=100)
     summary = models.TextField(blank=False)
 
@@ -12,7 +12,7 @@ class User(models.Model):
         return self.username
 
     def get_absolute_url(self):
-        return reverse('user-detail', args=[str(self.username)])
+        return reverse('player-detail', args=[str(self.username)])
     
 
 class Clip(models.Model):
@@ -26,7 +26,7 @@ class Clip(models.Model):
     title = models.CharField(max_length=200)
     game = models.CharField(max_length=200, choices=GAME)
     description = models.TextField(blank=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)    # A clip has a singular user
+    player = models.ForeignKey(Player, on_delete=models.CASCADE, default=None)    # A clip has a singular player
 
     # Define default String to return the name for representing the Model object."
     def __str__(self):
