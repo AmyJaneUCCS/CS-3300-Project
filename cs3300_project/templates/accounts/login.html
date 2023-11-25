@@ -3,42 +3,61 @@
 
 <!-- Replace block content in base_template.html -->
 {% block content %}
-<h1>login</h1>
-<div class="d-flex justify-content-center form_container">
-  <form method="POST" action="">
-    {% csrf_token %}
-    <p>
-      username
-      <input
-        type="text"
-        name="username"
-        placeholder="Username..."
-        class="form-control"
-      />
-    </p>
-    <p>
-      password
-      <input
-        type="password"
-        name="password"
-        placeholder="Password..."
-        class="form-control"
-      />
-    </p>
 
-    <input class="btn btn-primary" type="submit" value="Login" />
-  </form>
+<!-- Testing what a new form would look like -->
+<div class="relative flex flex-col justify-center mt-20 overflow-hidden">
+  <div class="w-full p-6 m-auto bg-white rounded-md shadow-md lg:max-w-lg">
+    <h1 class="text-3xl font-semibold text-center text-primary">Login</h1>
+    <form class="space-y-4" method="POST" action="">
+      {% csrf_token %}
+      <div>
+        <label class="label py-1">
+          <span class="text-base label-text text-gray-600">Username</span>
+        </label>
+        <input
+          type="text"
+          name="username"
+          class="form-control w-full input input-bordered input-primary bg-slate-100 text-gray-600 placeholder-gray-500 placeholder-opacity-70"
+          placeholder="Enter your username"
+        />
+      </div>
+      <div>
+        <label class="label py-1">
+          <span class="text-base label-text text-gray-600">Password</span>
+        </label>
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter your password"
+          class="form-control w-full input input-bordered input-primary bg-slate-100 text-gray-600 placeholder-gray-500 placeholder-opacity-70"
+        />
+      </div>
 
-  <!-- display success message if user was able to create an account -->
-  {% for message in messages %}
-  <p>{{ message }}</p>
-  {% endfor %}
+      <!-- Login button -->
+      <div>
+        <input
+          class="btn btn-primary btn-circle w-full mt-4"
+          type="submit"
+          value="Login"
+        />
+      </div>
 
-  <!-- If the user doesn't have an account -->
-  <p>
-    Don't have an account?
-    <a href="{% url 'register' %}">Register</a>
-  </p>
+      <!-- If the user doesn't have an account -->
+      <div class="ml-1 text-gray-600">
+        Don't have an account?
+        <a
+          href="{% url 'register' %}"
+          class="text-blue-600 hover:underline hover:text-blue-600"
+          >Register</a
+        >
+      </div>
+
+      <!-- display success message if user was able to create an account -->
+      {% for message in messages %}
+      <p>{{ message }}</p>
+      {% endfor %}
+    </form>
+  </div>
 </div>
 
 {% endblock %}

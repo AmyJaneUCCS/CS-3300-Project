@@ -1,7 +1,6 @@
 from django.shortcuts import redirect, render
 from django.views import generic
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -64,10 +63,11 @@ def account(request, user_id):
 def yourAccount(request):
     return account(request, 1)
 
-@login_required(login_url='login')
+@login_required(login_url='login') # Only allowing people who are logged in to access this page
 def yourClips(request):
     return render(request, 'cs3300_project/yourclips.html')
 
+@login_required(login_url='login') # Only allowing people who are logged in to access this page
 def yourSaved(request):
     return render(request, 'cs3300_project/saved.html')
 
