@@ -1,20 +1,82 @@
-{% extends 'cs3300_project/base_template.html' %} {% block content %}
+<!-- Inherit from base.html -->
+{% extends 'cs3300_project/base_template.html' %}
 
-<h1>Register</h1>
+<!-- Replace block content in base_template.html -->
+{% block content %}
 
-<form method="POST" action="">
-  {% csrf_token %} {{form.username.label}} {{form.username}}
-  {{form.email.label}} {{form.email}} {{form.password1.label}}
-  {{form.password1}} {{form.password2.label}} {{form.password2}}
+<!-- Adding the newer register page -->
+<div class="relative flex flex-col justify-center mt-2 overflow-hidden">
+  <div class="w-full p-6 m-auto bg-white rounded-md shadow-md lg:max-w-lg">
+    <h1 class="text-3xl font-semibold text-center text-primary">Register</h1>
+    <form class="space-y-4" method="POST" action="">
+      {% csrf_token %}
+      <div>
+        <label class="label py-1">
+          <span class="text-base label-text text-gray-600">Username</span>
+        </label>
+        <input
+          type="text"
+          name="username"
+          class="form-control w-full input input-bordered input-primary bg-slate-100 text-gray-600 placeholder-gray-500 placeholder-opacity-70"
+          placeholder="Enter a username"
+        />
+      </div>
+      <div>
+        <label class="label py-1">
+          <span class="text-base label-text text-gray-600">Email</span>
+        </label>
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter your email"
+          class="form-control w-full input input-bordered input-primary bg-slate-100 text-gray-600 placeholder-gray-500 placeholder-opacity-70"
+        />
+      </div>
+      <div>
+        <label class="label py-1">
+          <span class="text-base label-text text-gray-600">Password</span>
+        </label>
+        <input
+          type="password1"
+          name="password1"
+          placeholder="Enter a password"
+          class="form-control w-full input input-bordered input-primary bg-slate-100 text-gray-600 placeholder-gray-500 placeholder-opacity-70"
+        />
+      </div>
+      <div>
+        <label class="label py-1">
+          <span class="text-base label-text text-gray-600"
+            >Reenter password</span
+          >
+        </label>
+        <input
+          type="password2"
+          name="password2"
+          placeholder="Reenter password"
+          class="form-control w-full input input-bordered input-primary bg-slate-100 text-gray-600 placeholder-gray-500 placeholder-opacity-70"
+        />
+      </div>
 
-  <!-- Form errors -->
+      <!-- Register button -->
+      <div>
+        <input
+          class="btn btn-primary btn-circle w-full mt-4"
+          type="submit"
+          name="Create User"
+        />
+      </div>
 
-  <!-- If user already has an account -->
-  <p>
-    Already have an account?
-    <a href="{% url 'login' %}">Log in</a>
-  </p>
-  <input type="submit" name="Create User" />
-</form>
+      <!-- If the user has an account -->
+      <div class="ml-1 text-gray-600">
+        Already have an account?
+        <a
+          href="{% url 'login' %}"
+          class="text-blue-600 hover:underline hover:text-blue-600"
+          >Login</a
+        >
+      </div>
+    </form>
+  </div>
+</div>
 
 {% endblock %}
