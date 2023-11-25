@@ -7,12 +7,14 @@
 <form action="" method="POST">
   {% csrf_token %}
   <a
-    class="btn btn-primary"
+    class="btn btn-neutral"
     role="button"
     href="{% url 'clip-detail' clip.id %}"
     >Cancel</a
   >
-  <input type="submit" name="Submit" />
+  <button class="btn btn-secondary mt-2" type="submit" name="submit">
+    Delete
+  </button>
 </form>
 
 {% endblock %}

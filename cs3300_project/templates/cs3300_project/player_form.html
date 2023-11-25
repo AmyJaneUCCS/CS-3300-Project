@@ -1,0 +1,35 @@
+{% extends 'cs3300_project/base_template.html' %} {% block content %}
+
+<div class="relative flex flex-col justify-center overflow-hidden">
+  <div class="w-full p-6 bg-white rounded-md shadow-md lg:max-w-xl">
+    <h1 class="text-3xl font-semibold text-center text-primary">
+      Update Account
+    </h1>
+    <!-- Username and summary -->
+    <form action="" method="POST">
+      {% csrf_token %}
+      <div>
+        <label class="label py-1" for="{{ form.username.id_for_label }}">
+          <span class="text-base label-text text-gray-600">Username:</span>
+        </label>
+        {{ form.username }} {{ form.username.errors }}
+      </div>
+      <div>
+        <label class="label py-1" for="{{ form.summary.id_for_label }}"
+          ><span class="text-base label-text text-gray-600"
+            >Summary:</span
+          ></label
+        >
+        {{ form.summary }} {{ form.summary.errors }}
+      </div>
+
+      <!-- The sumbit and cancel buttons -->
+      <div>
+        <input class="btn btn-primary mt-2" type="submit" name="Submit" />
+        <a href="{% url 'yourAccount' %}" class="btn btn-neutral">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

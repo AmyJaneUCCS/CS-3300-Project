@@ -13,6 +13,7 @@ urlpatterns = [
     path('clips/<int:pk>', ClipDetailView.as_view(), name='clip-detail'),
     path('player/<int:player_id>/', views.account, name='account'), # Accessing someone else's account
     path('player/', views.yourAccount, name='yourAccount'), # Accessing your own account
+    path('player/<int:player_id>/update_player/', views.updatePlayer, name='update_player'), # Updating your account
     path('player/yourclips', views.yourClips, name='yourClips'), # Accessing your own clips
     path('player/<int:player_id>/create_clip/', views.createClip, name='create_clip'), # Creating a clip
     path('player/<int:player_id>/update_clip/<int:clip_id>', views.updateClip, name='update_clip'), # Updating a clip

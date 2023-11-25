@@ -4,20 +4,18 @@
 <!-- Replace block content in base_template.html -->
 {% block content %}
 <h1 class="text-3xl font-semibold text-gray-600 mb-2">Account Page</h1>
-<p><strong>This is your username:</strong> {{ player.username }}</p>
-<p><strong>This is your account username:</strong> {{ request.user }}</p>
+<p class="text-gray-600"><strong>Username:</strong> {{ player.username }}</p>
+<p class="text-gray-600"><strong>Summary:</strong> {{ player.summary }}</p>
+<p class="text-gray-600 mb-4">
+  <strong>Amount of clips:</strong> Work in progress
+</p>
 
-<button class="btn">Button</button>
-<button class="btn btn-neutral">Neutral</button>
-<button class="btn btn-primary">Primary</button>
-<button class="btn btn-secondary">Secondary</button>
-<button class="btn btn-accent">Accent</button>
-<button class="btn btn-ghost">Ghost</button>
-<button class="btn btn-link">Link</button>
+<a
+  class="btn btn-accent"
+  href="{% url 'update_player' player.id %}"
+  role="button"
+  >Update Account</a
+>
+<a href="{% url 'logout'%}" class="btn btn-secondary">Logout</a>
 
-<!-- Adding in the login, logout stuff that should be in a navigation bar -->
-<div>
-  <span>Hello, {{request.user}}</span>
-  <span><a href="{% url 'logout' %}">Logout</a></span>
-</div>
 {% endblock %}
