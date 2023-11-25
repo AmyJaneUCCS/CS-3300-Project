@@ -3,13 +3,13 @@
 
 <p><strong>Game:</strong> {{ clip.game }}</p>
 <p><strong>Description:</strong> {{ clip.description }}</p>
-<p><strong>User:</strong> {{ clip.user }}</p>
+<p><strong>Player:</strong> {{ clip.player }}</p>
 
 <!-- Update button -->
 <p>
   <a
     class="btn btn-accent"
-    href="{% url 'update_clip' clip.user.id clip.id %}"
+    href="{% url 'update_clip' clip.player.id clip.id %}"
     role="button"
     >Update</a
   >
@@ -17,7 +17,7 @@
   <!-- Delete button -->
   <a
     class="btn btn-secondary"
-    href="{% url 'delete_clip' clip.user.id clip.id %}"
+    href="{% url 'delete_clip' clip.player.id clip.id %}"
     role="button"
     >Delete</a
   >

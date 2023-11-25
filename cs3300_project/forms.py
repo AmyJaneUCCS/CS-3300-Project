@@ -14,3 +14,4 @@ class CreateUserForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
+# Could define a custom form here for a Player, (make sure to look back at the slides for how to do that...with user thing)
