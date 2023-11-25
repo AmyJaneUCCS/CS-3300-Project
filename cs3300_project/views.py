@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from cs3300_project.forms import ClipForm
-from .models import Clip, User
+from .models import Clip, Player
 from .forms import CreateUserForm
 
 class ClipListView(generic.ListView):
@@ -55,9 +55,9 @@ def logoutUser(request):
     return redirect('login')
 
 # Other views
-def account(request, user_id):
-    user=User.objects.get(id=user_id)
-    context = {'user':user }
+def account(request, player_id):
+    player=Player.objects.get(id=player_id)
+    context = {'player':player }
     return render(request, 'cs3300_project/account.html', context)
 
 def yourAccount(request):
@@ -71,21 +71,21 @@ def yourClips(request):
 def yourSaved(request):
     return render(request, 'cs3300_project/saved.html')
 
-def createClip(request, user_id):
+def createClip(request, player_id):
     form = ClipForm()
-    user = User.objects.get(pk=user_id)
+    player = Player.objects.get(pk=player_id)
 
     if request.method == 'POST':
         # Create a new dictionary with form data and clip_id
         clip_data = request.POST.copy()
-        clip_data['user_id'] = user_id
+        clip_data['player_id'] = player_id
 
         form = ClipForm(clip_data)
         if form.is_valid():
             # Save the form without committing to the database
             clip = form.save(commit=False)
-            # Set the user relationship
-            clip.user = user
+            # Set the player relationship
+            clip.player = player
             clip.save()
 
             # Redirect back to the your clips page
@@ -94,7 +94,7 @@ def createClip(request, user_id):
     context = {'form': form}
     return render(request, 'cs3300_project/clip_form.html', context)
 
-def updateClip(request, user_id, clip_id):
+def updateClip(request, player_id, clip_id):
     clip = Clip.objects.get(pk=clip_id)
     form = ClipForm(instance=clip)
 
@@ -112,7 +112,7 @@ def updateClip(request, user_id, clip_id):
     context = {'form': form, 'clip': clip}
     return render(request, 'cs3300_project/clip_form.html', context)
 
-def deleteClip(request, user_id, clip_id):
+def deleteClip(request, player_id, clip_id):
     form = ClipForm()
     clip = Clip.objects.get(pk=clip_id)
 

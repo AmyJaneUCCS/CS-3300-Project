@@ -3,8 +3,10 @@
 
 <!-- Replace block content in base_template.html -->
 {% block content %}
-<h1>Account Page</h1>
-<p><strong>This is your username:</strong> {{ user.username }}</p>
+<h1 class="text-3xl font-semibold text-gray-600 mb-2">Account Page</h1>
+<p><strong>This is your username:</strong> {{ player.username }}</p>
+<p><strong>This is your account username:</strong> {{ request.user }}</p>
+
 <button class="btn">Button</button>
 <button class="btn btn-neutral">Neutral</button>
 <button class="btn btn-primary">Primary</button>
