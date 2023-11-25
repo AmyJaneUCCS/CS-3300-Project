@@ -1,11 +1,64 @@
 {% extends 'cs3300_project/base_template.html' %} {% block content %}
 
-<form action="" method="POST">
-  {% csrf_token %}
-  <table>
-    {{ form.as_table }}
-  </table>
-  <input type="submit" name="Submit" />
-</form>
+<div class="relative flex flex-col justify-center overflow-hidden">
+  <div class="w-full p-6 bg-white rounded-md shadow-md lg:max-w-xl">
+    <h1 class="text-3xl font-semibold text-center text-primary">
+      Clip Details
+    </h1>
+    <!-- Title, game, and description-->
+    <form class="space-y-4" action="" method="POST">
+      {% csrf_token %}
+      <div>
+        <label class="label py-1" for="{{ form.title.id_for_label }}">
+          <span class="text-base label-text text-gray-600">Title:</span>
+        </label>
+        <input
+          type="text"
+          name="title"
+          class="form-control w-full input input-bordered input-primary bg-slate-100 text-gray-600 placeholder-gray-500 placeholder-opacity-70"
+          placeholder="Enter a title"
+        />
+        {{ form.title.errors }}
+      </div>
+
+      <div>
+        <label class="label py-1" for="{{ form.game.id_for_label }}"
+          ><span class="text-base label-text text-gray-600">Game:</span></label
+        >
+        <select
+          type="select"
+          name="game"
+          class="form-control w-full input input-bordered input-primary bg-slate-100 text-gray-600"
+        >
+        {% for value, label in form.game.field.choices %}
+          <option value="{{ value }}" {% if value == form.game.value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+        </select>
+        {{ form.game.errors }}
+      </div>
+
+      <div>
+        <label class="label py-1" for="{{ form.description.id_for_label }}"
+          ><span class="text-base label-text text-gray-600"
+            >Description:</span
+          ></label
+        >
+        <textarea
+          type="text"
+          name="description"
+          class="form-control w-full input input-bordered input-primary bg-slate-100 text-gray-600 placeholder-gray-500 placeholder-opacity-70"
+          placeholder="Enter a description"
+        ></textarea>
+        {{ form.description.errors }}
+      </div>
+
+      <!-- The sumbit and cancel buttons -->
+      <div>
+        <input class="btn btn-primary mt-2" type="submit" name="Submit" />
+        <a href="{% url 'yourClips' %}" class="btn btn-neutral">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
 
 {% endblock %}

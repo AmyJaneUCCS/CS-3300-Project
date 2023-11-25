@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-from cs3300_project.forms import ClipForm
+from cs3300_project.forms import ClipForm, PlayerForm
 from .models import Clip, Player
 from .forms import CreateUserForm
 
@@ -63,12 +63,18 @@ def account(request, player_id):
     return render(request, 'cs3300_project/account.html', context)
 
 # Accessing the information for your own account
+@login_required(login_url='login') # Only allowing people who are logged in to access this page
 def yourAccount(request):
-    return account(request, 1)
+    player = request.user.player 
+    return account(request, player.id) 
 
 @login_required(login_url='login') # Only allowing people who are logged in to access this page
 def yourClips(request):
-    return render(request, 'cs3300_project/yourclips.html')
+    # Assuming there is one clip instance to get the choices (yikes)
+    clip_instance = Clip.objects.first()
+    available_games = dict(clip_instance._meta.get_field('game').choices)
+    context = {'available_games': available_games}
+    return render(request, 'cs3300_project/yourclips.html', context)
 
 @login_required(login_url='login') # Only allowing people who are logged in to access this page
 def yourSaved(request):
@@ -126,3 +132,20 @@ def deleteClip(request, player_id, clip_id):
     
     context = {'form': form, 'clip': clip}
     return render(request, 'cs3300_project/clip_delete_form.html', context)
+
+def updatePlayer(request, player_id):
+    player = Player.objects.get(pk=player_id)
+    form = PlayerForm(instance=player)
+
+    if request.method == 'POST':
+        player_data = request.POST.copy()
+        form=PlayerForm(player_data, instance=player) # Autofills the data
+
+        if form.is_valid():
+            player.username=form.cleaned_data['username']
+            player.summary=form.cleaned_data['summary']
+            player.save()
+            return redirect('yourAccount')
+        
+    context = {'form': form, 'player': player}
+    return render(request, 'cs3300_project/player_form.html', context)

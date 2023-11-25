@@ -1,12 +1,17 @@
 {% extends 'cs3300_project/base_template.html' %} {% block content %}
-<h1>Clip Title: {{ clip.title }}</h1>
+<h1 class="text-3xl font-semibold text-gray-600 mb-2">{{ clip.title }}</h1>
 
-<p><strong>Game:</strong> {{ clip.game }}</p>
-<p><strong>Description:</strong> {{ clip.description }}</p>
-<p><strong>Player:</strong> {{ clip.player }}</p>
+<p class="text-gray-600"><strong>Player:</strong> {{ clip.player }}</p>
+<p class="text-gray-600"><strong>Game:</strong> {{ clip.game }}</p>
+<p class="text-gray-600 mb-4">
+  <strong>Description:</strong> {{ clip.description }}
+</p>
 
-<!-- Update button -->
 <p>
+  <!-- Cancel button -->
+  <a href="{% url 'index' %}" class="btn btn-neutral">Cancel</a>
+
+  <!-- Update button -->
   <a
     class="btn btn-accent"
     href="{% url 'update_clip' clip.player.id clip.id %}"
