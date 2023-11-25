@@ -20,6 +20,7 @@
           class="form-control w-full input input-bordered input-primary bg-slate-100 text-gray-600 placeholder-gray-500 placeholder-opacity-70"
           placeholder="Enter a username"
         />
+        {{ form.username.errors }}
       </div>
       <div>
         <label class="label py-1">
@@ -31,6 +32,7 @@
           placeholder="Enter your email"
           class="form-control w-full input input-bordered input-primary bg-slate-100 text-gray-600 placeholder-gray-500 placeholder-opacity-70"
         />
+        {{ form.email.errors }}
       </div>
       <div>
         <label class="label py-1">
@@ -42,6 +44,7 @@
           placeholder="Enter a password"
           class="form-control w-full input input-bordered input-primary bg-slate-100 text-gray-600 placeholder-gray-500 placeholder-opacity-70"
         />
+        {{ form.password1.errors }}
       </div>
       <div>
         <label class="label py-1">
@@ -55,6 +58,7 @@
           placeholder="Reenter password"
           class="form-control w-full input input-bordered input-primary bg-slate-100 text-gray-600 placeholder-gray-500 placeholder-opacity-70"
         />
+        {{ form.password2.errors }}
       </div>
 
       <!-- Register button -->

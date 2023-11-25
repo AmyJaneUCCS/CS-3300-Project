@@ -17,6 +17,7 @@
           name="title"
           class="form-control w-full input input-bordered input-primary bg-slate-100 text-gray-600 placeholder-gray-500 placeholder-opacity-70"
           placeholder="Enter a title"
+          value="{{ form.instance.title }}"
         />
         {{ form.title.errors }}
       </div>
@@ -48,7 +49,7 @@
           name="description"
           class="form-control w-full input input-bordered input-primary bg-slate-100 text-gray-600 placeholder-gray-500 placeholder-opacity-70"
           placeholder="Enter a description"
-        ></textarea>
+        >{{ form.instance.description }}</textarea>
         {{ form.description.errors }}
       </div>
 

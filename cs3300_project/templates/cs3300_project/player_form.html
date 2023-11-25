@@ -8,23 +8,42 @@
     <!-- Username and summary -->
     <form action="" method="POST">
       {% csrf_token %}
-      <div>
+      <!-- Wasn't sure how to change the username for the player and User
+         so only allowing the user to change their summary atm-->
+
+      <!-- <div>
         <label class="label py-1" for="{{ form.username.id_for_label }}">
           <span class="text-base label-text text-gray-600">Username:</span>
         </label>
-        {{ form.username }} {{ form.username.errors }}
+        <input
+          type="text"
+          name="username"
+          class="form-control w-full input input-bordered input-primary bg-slate-100 text-gray-600 placeholder-gray-500 placeholder-opacity-70"
+          placeholder="Enter a username"
+          value="{{ form.instance.username }}"
+        />
+        {{ form.username.errors }}
       </div>
+    -->
       <div>
         <label class="label py-1" for="{{ form.summary.id_for_label }}"
           ><span class="text-base label-text text-gray-600"
             >Summary:</span
           ></label
         >
-        {{ form.summary }} {{ form.summary.errors }}
+        <textarea
+          type="text"
+          name="summary"
+          class="form-control w-full input input-bordered input-primary bg-slate-100 text-gray-600 placeholder-gray-500 placeholder-opacity-70"
+          placeholder="Enter a summary"
+        >
+{{ form.instance.summary }}</textarea
+        >
+        {{ form.summary.errors }}
       </div>
 
       <!-- The sumbit and cancel buttons -->
-      <div>
+      <div class="mt-3">
         <input class="btn btn-primary mt-2" type="submit" name="Submit" />
         <a href="{% url 'yourAccount' %}" class="btn btn-neutral">Cancel</a>
       </div>

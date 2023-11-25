@@ -144,8 +144,10 @@ def updatePlayer(request, player_id):
         if form.is_valid():
             player.username=form.cleaned_data['username']
             player.summary=form.cleaned_data['summary']
+            player.user.username=form.cleaned_data['username']
             player.save()
             return redirect('yourAccount')
         
     context = {'form': form, 'player': player}
     return render(request, 'cs3300_project/player_form.html', context)
+
