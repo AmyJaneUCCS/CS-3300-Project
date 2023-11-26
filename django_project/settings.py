@@ -39,8 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Add your app name here
-    'cs3300_project', 
-    'bootstrap5',
+    'cs3300_project',
     'tailwind',
     'theme',
     'django_browser_reload',
