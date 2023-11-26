@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.views import generic
 from django.contrib import messages
 
+from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
@@ -73,7 +74,14 @@ def yourClips(request):
     # Assuming there is one clip instance to get the choices (yikes)
     clip_instance = Clip.objects.first()
     available_games = dict(clip_instance._meta.get_field('game').choices)
-    context = {'available_games': available_games}
+
+    # Add more context by adding the player
+    player = request.user.player
+
+    # Get the clips associated with the current player (querying)
+    clip_list = Clip.objects.filter(player=player)
+
+    context = {'available_games': available_games, 'player': player, 'clip_list': clip_list}
     return render(request, 'cs3300_project/yourclips.html', context)
 
 @login_required(login_url='login') # Only allowing people who are logged in to access this page
@@ -82,6 +90,7 @@ def yourSaved(request):
 
 # Code for creating, updating, and deleting a clip
 def createClip(request, player_id):
+    player = get_object_or_404(Player, pk=player_id)
     form = ClipForm()
     player = Player.objects.get(pk=player_id)
 
