@@ -154,6 +154,7 @@ def updatePlayer(request, player_id):
             player.username=form.cleaned_data['username']
             player.summary=form.cleaned_data['summary']
             player.user.username=form.cleaned_data['username']
+            # Update player's User username
             player.save()
             return redirect('yourAccount')
         

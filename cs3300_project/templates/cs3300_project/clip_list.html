@@ -2,7 +2,7 @@
 
 <!-- block content here -->
 {% block content %}
-<h1 class="text-3xl font-semibold text-gray-600 mb-4">Clip List</h1>
+<h1 class="text-3xl font-semibold text-gray-600 mb-6">Clip List</h1>
 
 {% if clip_list %}
 <div class="flex flex-wrap ml-2">
@@ -20,13 +20,14 @@
     <!-- Title, game name, and clip.description -->
     <div class="card-body">
       <h2 class="card-title font-semibold text-gray-600">{{ clip.title }}</h2>
-      <p class="text-gray-600 text-md">
+      <p class="text-gray-600 text-md mb-2">
         User: {{ clip.player }}<br />Game: {{ clip.game }}<br />
         {{ clip.description }}
       </p>
-
+      <!-- Adding a horizontal line -->
+      <hr />
       <!-- Add in icons for the user to like, save, and share -->
-      <div class="card-actions mt-2">
+      <div class="mt-2 text-center">
         <a class="btn btn-circle btn-ghost">
           <svg
             xmlns="http://www.w3.org/2000/svg"
