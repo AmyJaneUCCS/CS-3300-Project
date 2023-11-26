@@ -1,6 +1,37 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from .models import Player, Clip
+
+
+# Test if any user can go to the login page 
+class CheckPages(TestCase):
+    def setUp(self):
+        User.objects.create_user(username="testUser", email="testemail@gmail.com", password="somepass89")
+
+    def test_login_page(self):
+        response = self.client.get('/login/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_home_page(self):
+        response = self.client.get('/register/')
+        self.assertEqual(response.status_code, 200)
+    
+    # Testing if the user is not logged out
+    def test_logout_page(self):
+        response = self.client.get('/logout/')
+        self.assertEqual(response.status_code, 302)
+    
+    def test_yourclips_page(self):
+        response = self.client.get('/player/yourclips')
+        self.assertEqual(response.status_code, 302)
+    
+    def test_saved(self):
+        response = self.client.get('/player/saved')
+        self.assertEqual(response.status_code, 302)
+    
+    def test_account_page(self):
+        response = self.client.get('/player/')
+        self.assertEqual(response.status_code, 302)
 
 # Unit test for the User
 class UserTestCase(TestCase):
@@ -12,7 +43,7 @@ class UserTestCase(TestCase):
         self.assertEqual(userTest1.username, "testUser")
         self.assertEqual(userTest1.email, "testemail@gmail.com")
         self.assertEqual(userTest1.password, "somepass89")
-
+        
 # Unit tests for the Player and Clip models
 class PlayerTestCase(TestCase):
     def setUp(self):
