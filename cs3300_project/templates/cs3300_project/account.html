@@ -5,6 +5,7 @@
 {% block content %}
 <h1 class="text-3xl font-semibold text-gray-600 mb-2">Account Page</h1>
 <p class="text-gray-600"><strong>Username:</strong> {{ player.username }}</p>
+<p class="text-gray-600"><strong>Email:</strong> {{ request.user.email }}</p>
 <p class="text-gray-600"><strong>Summary:</strong> {{ player.summary }}</p>
 <p class="text-gray-600 mb-4">
   <strong>Amount of clips:</strong> Work in progress

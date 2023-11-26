@@ -1,7 +1,19 @@
 from django.test import TestCase
+from django.contrib.auth.models import User
 from .models import Player, Clip
 
-# Create your tests here.
+# Unit test for the User
+class UserTestCas(TestCase):
+    def setUp(self):
+        User.objects.create(username="testUser", email="testemail@gmail.com", password ="somepass89")
+    
+    def test_user_details(self):
+        userTest1 = User.objects.get(username="testUser")
+        self.assertEqual(userTest1.username, "testUser")
+        self.assertEqual(userTest1.email, "testemail@gmail.com")
+        self.assertEqual(userTest1.password, "somepass89")
+
+# Unit tests for the Player and Clip models
 class PlayerTestCase(TestCase):
     def setUp(self):
         Player.objects.create(username="playerTest1", summary="This is the test summary for player 1")
