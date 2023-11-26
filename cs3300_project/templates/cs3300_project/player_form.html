@@ -8,10 +8,7 @@
     <!-- Username and summary -->
     <form class="space-y-4" method="POST" action="">
       {% csrf_token %}
-      <!-- Wasn't sure how to change the username for the player and User
-         so only allowing the user to change their summary atm-->
-
-      <!-- <div>
+      <div>
         <label class="label py-1" for="{{ form.username.id_for_label }}">
           <span class="text-base label-text text-gray-600">Username:</span>
         </label>
@@ -24,7 +21,6 @@
         />
         {{ form.username.errors }}
       </div>
-    -->
       <div>
         <label class="label py-1" for="{{ form.summary.id_for_label }}"
           ><span class="text-base label-text text-gray-600"
