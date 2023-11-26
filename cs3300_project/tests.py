@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from .models import Player, Clip
 
 # Unit test for the User
-class UserTestCas(TestCase):
+class UserTestCase(TestCase):
     def setUp(self):
         User.objects.create(username="testUser", email="testemail@gmail.com", password ="somepass89")
     
