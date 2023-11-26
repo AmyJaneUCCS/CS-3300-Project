@@ -5,10 +5,13 @@
 <h1 class="text-3xl font-semibold text-gray-600 mb-4">Clip List</h1>
 
 {% if clip_list %}
-<div class="flex flex-wrap">
+<div class="flex flex-wrap ml-2">
   {% for clip in clip_list %}
 
-  <div class="card bg-white mb-6 mr-6 card-compact" style="width: 325px">
+  <div
+    class="card bg-white mb-6 mr-6 card-compact shadow-lg"
+    style="width: 325px"
+  >
     <!-- Insert random image here -->
     <figure>
       <img src="{% static 'images/Valorant.jpg' %}" alt="Valorant Logo" />
@@ -16,14 +19,10 @@
 
     <!-- Title, game name, and clip.description -->
     <div class="card-body">
-      <a
-        href="{{ clip.get_absolute_url }}"
-        class="card-title font-semibold text-gray-600"
-      >
-        {{ clip.title }}
-      </a>
+      <h2 class="card-title font-semibold text-gray-600">{{ clip.title }}</h2>
       <p class="text-gray-600 text-md">
-        Game: {{ clip.game }}<br />{{ clip.description }}
+        User: {{ clip.player }}<br />Game: {{ clip.game }}<br />
+        {{ clip.description }}
       </p>
 
       <!-- Add in icons for the user to like, save, and share -->
