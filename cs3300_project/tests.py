@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from .models import Player, Clip
 
 
-# Test if any user can go to the login page 
+# Test if any user can go to the different pages
 class CheckPages(TestCase):
     def setUp(self):
         User.objects.create_user(username="testUser", email="testemail@gmail.com", password="somepass89")
